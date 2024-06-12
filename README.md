@@ -35,4 +35,4 @@ Nội dung file .env thì copy từ file .env.example
 
 Cần giải đáp thắc mắc (hỗ trợ), các bạn vui lòng comment bên dưới video hoặc inbox trực tiếp qua facebook cho mình.
 
-them access-token
+them access-token s
