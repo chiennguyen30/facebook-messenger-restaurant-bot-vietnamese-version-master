@@ -1,6 +1,6 @@
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-let callSendAPI = async (response) => {
+let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
   let request_body = {
     recipient: {
