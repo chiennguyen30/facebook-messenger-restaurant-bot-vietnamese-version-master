@@ -126,11 +126,10 @@ async function handlePostback(sender_psid, received_postback) {
       response = { text: "Oops, try sending another image." };
       break;
     case "RESTART_BOT":
-      await ChatbotService.handleGetStarted(sender_psid);
-      break;
     case "GET_STARTED":
       await ChatbotService.handleGetStarted(sender_psid);
       break;
+
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
       break;
@@ -210,7 +209,7 @@ let postSetuppersistentMenu = async (req, res) => {
             type: "web_url",
             title: "Youtube channel NvC IT",
             url: "https://www.youtube.com/channel/UCDYhLHj32re_gsy_QhWVhog",
-            webview_height_ratio: "VIEW_YTB_CHANNEL",
+            webview_height_ratio: "full",
           },
           {
             type: "web_url",
