@@ -57,6 +57,7 @@ let handleGetStarted = (sender_psid) => {
       };
       let response2 = sendGetStartedTemplate();
       await callSendAPI(sender_psid, response1);
+      await callSendAPI(sender_psid, response2);
       resolve("done");
     } catch (error) {
       reject(error);
