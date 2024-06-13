@@ -30,7 +30,7 @@ let handleGetStarted = (sender_psid) => {
   return Promise(async (resolve, reject) => {
     try {
       let response = { text: "Xin chào bạn đến với Fullstack bạn cần mình giúp gì không?" };
-      await callSendAPI(response);
+      await callSendAPI(sender_psid, response);
       resolve("done");
     } catch (error) {
       reject(error);
