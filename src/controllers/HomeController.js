@@ -112,10 +112,9 @@ function handleMessage(sender_psid, received_message) {
 
 // Handles messaging_postbacks events
 async function handlePostback(sender_psid, received_postback) {
-  let response;
-
   // Get the payload for the postback
   let payload = received_postback.payload;
+  console.log(`Received postback payload: ${payload}`);
 
   // Set the response based on the postback payload
   switch (payload) {
@@ -127,16 +126,15 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     case "RESTART_BOT":
     case "GET_STARTED":
+      console.log(`Handling GET_STARTED or RESTART_BOT for sender_psid: ${sender_psid}`);
       await ChatbotService.handleGetStarted(sender_psid);
+      response = { text: "Bot is restarted!" };
       break;
 
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
       break;
   }
-
-  // Send the message to acknowledge the postback
-  // callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
@@ -174,7 +172,7 @@ let postSetupProfile = async (req, res) => {
     get_started: {
       payload: "GET_STARTED",
     },
-    whitelisted_domains: ["https://restaurant-nvc.onrender.com"],
+    whitelisted_domains: ["https://restaurant-nvc.onrender.com/"],
   };
 
   // Send the HTTP request to the Messenger Platform
