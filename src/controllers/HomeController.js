@@ -1,6 +1,6 @@
 require("dotenv").config();
 import request from "request";
-
+import ChatbotService from "../services/ChatbotService";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 //process.env.NAME_VARIABLES
@@ -111,7 +111,7 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
   let response;
 
   // Get the payload for the postback
@@ -126,7 +126,8 @@ function handlePostback(sender_psid, received_postback) {
       response = { text: "Oops, try sending another image." };
       break;
     case "GET_STARTED":
-      response = { text: "Xin chào bạn đến với Fullstack bạn cần mình giúp gì không?" };
+      await ChatbotService.handleGetStarted();
+
       break;
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
@@ -134,7 +135,7 @@ function handlePostback(sender_psid, received_postback) {
   }
 
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
+  // callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API
