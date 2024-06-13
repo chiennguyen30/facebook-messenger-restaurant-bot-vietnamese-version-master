@@ -116,6 +116,7 @@ async function handlePostback(sender_psid, received_postback) {
 
   // Get the payload for the postback
   let payload = received_postback.payload;
+  console.log(`Received postback payload: ${payload}`);
 
   // Set the response based on the postback payload
   switch (payload) {
@@ -129,6 +130,7 @@ async function handlePostback(sender_psid, received_postback) {
       await ChatbotService.handleGetStarted(sender_psid);
       break;
     case "RESTART_BOT":
+      console.log(`Handling GET_STARTED or RESTART_BOT for sender_psid: ${sender_psid}`);
       await ChatbotService.handleGetStarted(sender_psid);
       break;
     default:
