@@ -125,6 +125,7 @@ async function handlePostback(sender_psid, received_postback) {
     case "no":
       response = { text: "Oops, try sending another image." };
       break;
+    case "RESTART_BOT":
     case "GET_STARTED":
       await ChatbotService.handleGetStarted(sender_psid);
       break;
@@ -216,7 +217,7 @@ let postSetuppersistentMenu = async (req, res) => {
             webview_height_ratio: "full",
           },
           {
-            type: "web_url",
+            type: "postback",
             title: "Khởi động lại bot",
             payload: "RESTART_BOT",
           },
