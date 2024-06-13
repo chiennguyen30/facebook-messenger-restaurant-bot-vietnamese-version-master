@@ -26,27 +26,26 @@ let callSendAPI = async (sender_psid, response) => {
     }
   );
 };
-let getUserName = async (sender_psid) => {
-  let userName = "";
-  // Send the HTTP request to the Messenger Platform
-  await request(
-    {
-      uri: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
-      qs: { access_token: PAGE_ACCESS_TOKEN },
-      method: "GET",
-    },
-    (err, res, body) => {
-      console.log(body);
-      if (!err) {
-        response = JSON.parse(res);
-        userName = response.first_name + " " + response.last_name;
-      } else {
-        console.error("Unable to send message:" + err);
+let getUserName = (sender_psid) => {
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        uri: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+        method: "GET",
+      },
+      (err, res, body) => {
+        console.log(body);
+        if (!err) {
+          body = JSON.parse(body);
+          let userName = body.first_name + " " + body.last_name;
+          resolve(userName);
+        } else {
+          console.error("Unable to send message:" + err);
+          reject(err);
+        }
       }
-    }
-  );
-
-  return userName;
+    );
+  });
 };
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
