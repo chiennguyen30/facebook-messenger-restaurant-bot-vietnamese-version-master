@@ -10,30 +10,5 @@
     <form action="/setup-profile" method="POST">
       <button type="submit">Setup profile</button>
     </form>
-    <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
-    <div
-      id="fb-customer-chat"
-      class="fb-customerchat"
-      page_id="321491317719719"
-      attribution="setup_tool"
-      logged_in_greeting="Xin chào. Mình có thể giúp gì được cho bạn?"
-      logged_out_greeting="Xin chào. Mình có thể giúp gì là bằng nhau cho bạn?"
-    ></div>
-
-    <script>
-      window.fbAsyncInit = function () {
-        FB.init({ xfbml: true, version: "v20.0" });
-      };
-      (function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      })(document, "script", "facebook-jssdk");
-    </script>
   </body>
 </html>
