@@ -118,13 +118,21 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === "yes") {
-    response = { text: "Thanks!" };
-  } else if (payload === "no") {
-    response = { text: "Oops, try sending another image." };
-  } else if (payload === "GET_STARTED") {
-    response = { text: "Xin chào bạn đến với Fullstack bạn cần mình giúp gì không?" };
+  switch (payload) {
+    case "yes":
+      response = { text: "Thanks!" };
+      break;
+    case "no":
+      response = { text: "Oops, try sending another image." };
+      break;
+    case "GET_STARTED":
+      response = { text: "Xin chào bạn đến với Fullstack bạn cần mình giúp gì không?" };
+      break;
+    default:
+      response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
+      break;
   }
+
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
