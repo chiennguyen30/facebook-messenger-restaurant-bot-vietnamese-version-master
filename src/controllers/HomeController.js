@@ -196,9 +196,60 @@ let postSetupProfile = async (req, res) => {
   res.send("Setup profile success!");
 };
 
+let postSetuppersistentMenu = async (req, res) => {
+  let request_body = {
+    persistent_menu: [
+      {
+        locale: "default",
+        composer_input_disabled: false,
+        call_to_actions: [
+          {
+            type: "web_url",
+            title: "Youtube channel NvC IT",
+            url: "https://www.youtube.com/channel/UCDYhLHj32re_gsy_QhWVhog",
+            payload: "VIEW_YTB_CHANNEL",
+          },
+          {
+            type: "web_url",
+            title: "Facebook page Full Stack",
+            url: "https://www.facebook.com/profile.php?id=61560861574962",
+            webview_height_ratio: "full",
+          },
+          {
+            type: "web_url",
+            title: "Khởi động lại bot",
+            payload: "RESTART_BOT",
+          },
+        ],
+      },
+    ],
+  };
+
+  // Send the HTTP request to the Messenger Platform
+  await request(
+    {
+      uri: `https://graph.facebook.com/v18.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+      qs: { access_token: PAGE_ACCESS_TOKEN },
+      method: "POST",
+      json: request_body,
+    },
+    (err, res, body) => {
+      console.log(body);
+      if (!err) {
+        console.log("Setup persistent menu success!");
+      } else {
+        console.error("Unable to Setup persistent menu :" + err);
+      }
+    }
+  );
+
+  res.send("Setup profile success!");
+};
+
 module.exports = {
   getHomePage,
   postWebhook,
   getWebhook,
   postSetupProfile,
+  postSetuppersistentMenu,
 };
