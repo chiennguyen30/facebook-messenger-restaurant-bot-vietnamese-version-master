@@ -133,13 +133,12 @@ async function handlePostback(sender_psid, received_postback) {
       console.log(`Handling GET_STARTED or RESTART_BOT for sender_psid: ${sender_psid}`);
       await ChatbotService.handleGetStarted(sender_psid);
       break;
+    case "QUESTIONS":
+      await ChatbotService.handleQuestions(sender_psid);
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
       break;
   }
-
-  // Send the message to acknowledge the postback
-  // callSendAPI(sender_psid, response);
 }
 
 // Sends response messages via the Send API

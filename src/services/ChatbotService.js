@@ -55,7 +55,7 @@ let handleGetStarted = (sender_psid) => {
       let response1 = {
         text: `Xin chào bạn ${userName} đến với Fullstack bạn cần mình giúp gì không?`,
       };
-      let response2 = sendGetStartedTemplate();
+      let response2 = getStartedTemplate();
       await callSendAPI(sender_psid, response1);
       await callSendAPI(sender_psid, response2);
       resolve("done");
@@ -65,7 +65,7 @@ let handleGetStarted = (sender_psid) => {
   });
 };
 
-let sendGetStartedTemplate = () => {
+let getStartedTemplate = () => {
   let response = {
     attachment: {
       type: "template",
@@ -73,19 +73,19 @@ let sendGetStartedTemplate = () => {
         template_type: "generic",
         elements: [
           {
-            title: "Xin chào bạn đến với Full stack devoloper !!!",
-            subtitle: "Dưới đây là những lựa chọn câu hỏi của Full stack!",
+            title: "Nhà hàng NvC kính chào quý khách !!!",
+            subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn",
             image_url: IMG_GET_STARTED,
             buttons: [
               {
                 type: "postback",
-                title: "CÁC CÂU HỎI?",
-                payload: "QUESTIONS",
+                title: "MENU CHÍNH",
+                payload: "MAIN_MENU",
               },
               {
                 type: "postback",
-                title: "ĐẶT CÂU HỎI!",
-                payload: "MAKE_A_QUESTION",
+                title: "ĐẶT BÀN",
+                payload: "RESERVE_TABLE",
               },
               {
                 type: "postback",
@@ -101,4 +101,71 @@ let sendGetStartedTemplate = () => {
   return response;
 };
 
-module.exports = { handleGetStarted };
+let handleQuestions = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = getQuestionsTemplate();
+      await callSendAPI(sender_psid, response);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+let getQuestionsTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Xin chào bạn đến với nhà hàng của NvC!!!",
+            subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn!!!",
+            image_url: IMG_GET_STARTED,
+            buttons: [
+              {
+                type: "postback",
+                title: "BỮA TRƯA",
+                payload: "LUNCH_MENU",
+              },
+              {
+                type: "postback",
+                title: "BƯA TỐI",
+                payload: "DINNER_MENU?",
+              },
+            ],
+          },
+          {
+            title: "Giờ mở cửa của nhà hàng của NvC!",
+            subtitle: "T2-T6 10AM-11PM | T7 5PM - 10PM | CN 5PM - 9PM",
+            image_url: IMG_GET_STARTED,
+            buttons: [
+              {
+                type: "postback",
+                title: "ĐẶT BÀN",
+                payload: "RESERVE_TABLE",
+              },
+            ],
+          },
+          {
+            title: "Không gian nhà hàng!",
+            subtitle: "Nhà hàng có sức chưa lên tới 300 khách ngồi và phục vụ các bữa tiệc lớn!",
+            image_url: IMG_GET_STARTED,
+            buttons: [
+              {
+                type: "postback",
+                title: "CHI TIẾT PHÒNG",
+                payload: "SHOW_ROOM",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+
+module.exports = { handleGetStarted, handleQuestions };
