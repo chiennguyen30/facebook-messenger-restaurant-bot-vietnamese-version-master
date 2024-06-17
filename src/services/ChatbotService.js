@@ -101,11 +101,11 @@ let getStartedTemplate = () => {
   return response;
 };
 
-let handleQuestions = (sender_psid) => {
+let handleSendMainMenu = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let response = getQuestionsTemplate();
-      await callSendAPI(sender_psid, response);
+      let response1 = getMainMenuTemplate();
+      await callSendAPI(sender_psid, response1);
       resolve("done");
     } catch (error) {
       reject(error);
@@ -113,7 +113,7 @@ let handleQuestions = (sender_psid) => {
   });
 };
 
-let getQuestionsTemplate = () => {
+let getMainMenuTemplate = () => {
   let response = {
     attachment: {
       type: "template",
@@ -168,4 +168,4 @@ let getQuestionsTemplate = () => {
   return response;
 };
 
-module.exports = { handleGetStarted, handleQuestions };
+module.exports = { handleGetStarted, handleSendMainMenu };
