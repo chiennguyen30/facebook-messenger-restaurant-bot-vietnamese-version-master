@@ -1,7 +1,9 @@
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const IMG_GET_STARTED =
-  "https://huongnghiepsongan.com/wp-content/uploads/2021/05/H%E1%BB%8EI-%C4%90%C3%81P-1.gif";
+const IMG_GET_STARTED = "https://bit.ly/nvc-1";
+const IMG_MAIN_MENU_2 = "https://bit.ly/nvc-2 ";
+const IMG_MAIN_MENU_3 = "https://bit.ly/nvc-3";
+const IMG_MAIN_MENU_4 = "https://bit.ly/nvc-4";
 let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
   let request_body = {
@@ -123,7 +125,7 @@ let getMainMenuTemplate = () => {
           {
             title: "Xin chào bạn đến với nhà hàng của NvC!!!",
             subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn!!!",
-            image_url: IMG_GET_STARTED,
+            image_url: IMG_MAIN_MENU_2,
             buttons: [
               {
                 type: "postback",
@@ -133,14 +135,14 @@ let getMainMenuTemplate = () => {
               {
                 type: "postback",
                 title: "BƯA TỐI",
-                payload: "DINNER_MENU?",
+                payload: "DINNER_MENU",
               },
             ],
           },
           {
             title: "Giờ mở cửa của nhà hàng của NvC!",
             subtitle: "T2-T6 10AM-11PM | T7 5PM - 10PM | CN 5PM - 9PM",
-            image_url: IMG_GET_STARTED,
+            image_url: IMG_MAIN_MENU_3,
             buttons: [
               {
                 type: "postback",
@@ -152,7 +154,7 @@ let getMainMenuTemplate = () => {
           {
             title: "Không gian nhà hàng!",
             subtitle: "Nhà hàng có sức chưa lên tới 300 khách ngồi và phục vụ các bữa tiệc lớn!",
-            image_url: IMG_GET_STARTED,
+            image_url: IMG_MAIN_MENU_4,
             buttons: [
               {
                 type: "postback",
