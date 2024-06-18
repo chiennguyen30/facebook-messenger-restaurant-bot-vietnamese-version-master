@@ -5,9 +5,10 @@ const IMG_MAIN_MENU_2 = "https://bit.ly/nvc-2 ";
 const IMG_MAIN_MENU_3 = "https://bit.ly/nvc-3";
 const IMG_MAIN_MENU_4 = "https://bit.ly/nvc-4";
 const IMG_LUCNH_MENU_STEACK = "https://bit.ly/nvc-ca-hoi";
-const IMG_LUCNH_MENU_CA_HOI = "https://bit.ly/nvc-teack";
+const IMG_LUCNH_MENU_CA_HOI = "https://bit.ly/45J73nr";
 const IMG_LUCNH_MENU_NGOI_SEN = "https://bit.ly/4c4vWvX";
 const IMG_LUCNH_MENU_VIT_QUAY = "https://bit.ly/3KJVxhA";
+const IMG_BACK_TO_MAIN_MENU = "https://bit.ly/eric-bot-8";
 let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
   let request_body = {
@@ -243,6 +244,18 @@ let getLunchMenuTemplate = () => {
               },
             ],
           },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
+              },
+            ],
+          },
         ],
       },
     },
@@ -320,6 +333,7 @@ let handleViewAppetizers = (sender_psid) => {};
 let handleViewSteak = (sender_psid) => {};
 let handleViewCaHoi = (sender_psid) => {};
 let handleViewVitQuay = (sender_psid) => {};
+let handleBackMainMenu = (sender_psid) => {};
 module.exports = {
   handleGetStarted,
   handleSendMainMenu,
@@ -329,4 +343,5 @@ module.exports = {
   handleViewSteak,
   handleViewCaHoi,
   handleViewVitQuay,
+  handleBackMainMenu,
 };

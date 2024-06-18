@@ -142,7 +142,6 @@ async function handlePostback(sender_psid, received_postback) {
     case "DINNER_MENU":
       await ChatbotService.handleSendDinnerMenu(sender_psid);
       break;
-
     case "VIEW_APPETIZERS":
       await ChatbotService.handleViewAppetizers(sender_psid);
       break;
@@ -154,6 +153,9 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     case "VIEW_VIT_QUAY":
       await ChatbotService.handleViewVitQuay(sender_psid);
+      break;
+    case "BACK_TO_MAIN_MENU":
+      await ChatbotService.handleBackMainMenu(sender_psid);
       break;
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
