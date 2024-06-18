@@ -9,6 +9,22 @@ const IMG_LUCNH_MENU_CA_HOI = "https://bit.ly/45J73nr";
 const IMG_LUCNH_MENU_NGOI_SEN = "https://bit.ly/4c4vWvX";
 const IMG_LUCNH_MENU_VIT_QUAY = "https://bit.ly/3KJVxhA";
 const IMG_BACK_TO_MAIN_MENU = "https://bit.ly/eric-bot-8";
+
+const IMG_DETAIL_APPETIZERS_1 = "https://bit.ly/eric-bot-9";
+const IMG_DETAIL_APPETIZERS_2 = "https://bit.ly/eric-bot-10";
+const IMG_DETAIL_APPETIZERS_3 = "https://bit.ly/eric-bot-11";
+
+const IMG_DETAIL_FISH_1 = "https://bit.ly/eric-bot-12";
+const IMG_DETAIL_FISH_2 = "https://bit.ly/eric-bot-13";
+const IMG_DETAIL_FISH_3 = "https://bit.ly/eric-bot-14";
+
+const IMG_DETAIL_MEAT_1 = "https://bit.ly/4epCkj3";
+const IMG_DETAIL_MEAT_2 = "https://bit.ly/3RyrwFl";
+const IMG_DETAIL_MEAT_3 = "https://bit.ly/3RwQBAO";
+
+const IMG_DETAIL_DUCK_1 = "https://bit.ly/4baNDZz";
+const IMG_DETAIL_DUCK_2 = "https://bit.ly/4etnEiP";
+const IMG_DETAIL_DUCK_3 = "https://bit.ly/4c2XBO1";
 let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
   let request_body = {
@@ -219,9 +235,8 @@ let getLunchMenuTemplate = () => {
             ],
           },
           {
-            title: "Cá hồi áp chảo sốt chanh bơ tỏi",
-            subtitle:
-              "Cá hồi áp chảo sốt chanh bơ tỏi có mùi thơm vô cùng hấp dẫn, sốt chanh bơ tỏi lạ miệng vừa béo thơm vừa chua chua cùng thịt cá tươi ngon rất vừa miệng.",
+            title: "Cá hồi",
+            subtitle: "Cá hồi áp chảo,Cháo cá hồi,Cá hồi nướng,Ruốc cá hồi...",
             image_url: IMG_LUCNH_MENU_CA_HOI,
             buttons: [
               {
@@ -232,9 +247,8 @@ let getLunchMenuTemplate = () => {
             ],
           },
           {
-            title: "Vịt quay Bắc Kinh",
-            subtitle:
-              "Vịt quay Bắc Kinh là một món ăn từ Bắc Kinh được chế biến từ thời phong kiến. Đặc điểm của loại thịt này là lớp da mỏng và giòn, trong đó cách ăn truyền thống thường đi kèm với da và ít thịt, được người nấu thái lát trước mặt thực khách.",
+            title: "Vịt quay",
+            subtitle: "Vịt Bắc Kinh,Vịt Tứ Xuyên,Vịt Quế Hoa Nam Kinh,...",
             image_url: IMG_LUCNH_MENU_VIT_QUAY,
             buttons: [
               {
@@ -275,6 +289,7 @@ let handleSendDinnerMenu = (sender_psid) => {
   });
 };
 
+// function get menu
 let getDinnerMenuTemplate = () => {
   let response = {
     attachment: {
@@ -329,10 +344,212 @@ let getDinnerMenuTemplate = () => {
   };
   return response;
 };
-let handleViewAppetizers = (sender_psid) => {};
-let handleViewSteak = (sender_psid) => {};
-let handleViewCaHoi = (sender_psid) => {};
-let handleViewVitQuay = (sender_psid) => {};
+let handleViewAppetizers = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = getDetailViewAppetizerTemplate();
+      await callSendAPI(sender_psid, response);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+let getDetailViewAppetizerTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Dưa hấu Nhật",
+            subtitle: "500.000đ/1kg",
+            image_url: IMG_DETAIL_APPETIZERS_1,
+          },
+          {
+            title: "Xoài Việt Nam",
+            subtitle: "300.000đ/1kg",
+            image_url: IMG_DETAIL_APPETIZERS_2,
+          },
+          {
+            title: "Ổi Nhật",
+            subtitle: "200.000đ/1kg",
+            image_url: IMG_DETAIL_APPETIZERS_3,
+          },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+let getDetailViewSteakTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Bò bít tết kiểu Việt Nam",
+            subtitle: "Giá : 200.000đ",
+            image_url: IMG_DETAIL_MEAT_1,
+          },
+          {
+            title: "Bò bít tết kiểu Mỹ",
+            subtitle: "Giá : 300.000đ",
+            image_url: IMG_DETAIL_MEAT_2,
+          },
+          {
+            title: "Bò bít tết sốt phô mai",
+            subtitle: "Giá : 600.000đ",
+            image_url: IMG_DETAIL_MEAT_3,
+          },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+let getDetailViewCaHoiTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Cá hồi áp chảo",
+            subtitle: "Giá : 350.000đ",
+            image_url: IMG_DETAIL_FISH_1,
+          },
+          {
+            title: "Cháo cá hồi",
+            subtitle: "Giá : 300.000đ",
+            image_url: IMG_DETAIL_FISH_2,
+          },
+          {
+            title: "Cá hồi nướng",
+            subtitle: "Giá : 200.000đ",
+            image_url: IMG_DETAIL_FISH_3,
+          },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+let getDetailViewVitQuayTemplate = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "generic",
+        elements: [
+          {
+            title: "Vịt Bắc Kinh",
+            subtitle: "Giá : 500.000đ",
+            image_url: IMG_DETAIL_DUCK_1,
+          },
+          {
+            title: "Vịt Tứ Xuyên",
+            subtitle: "Giá : 400.000đ",
+            image_url: IMG_DETAIL_DUCK_2,
+          },
+          {
+            title: "Vịt Quế Hoa Nam Kinh",
+            subtitle: "Giá : 900.000đ",
+            image_url: IMG_DETAIL_DUCK_3,
+          },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+
+// funciton handle
+let handleViewSteak = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = getDetailViewSteakTemplate();
+      await callSendAPI(sender_psid, response);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+let handleViewCaHoi = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = getDetailViewCaHoiTemplate();
+      await callSendAPI(sender_psid, response);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+let handleViewVitQuay = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = getDetailViewVitQuayTemplate();
+      await callSendAPI(sender_psid, response);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 let handleBackMainMenu = async (sender_psid) => {
   await handleSendMainMenu(sender_psid);
 };
