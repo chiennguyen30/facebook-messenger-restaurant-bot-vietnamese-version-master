@@ -333,7 +333,9 @@ let handleViewAppetizers = (sender_psid) => {};
 let handleViewSteak = (sender_psid) => {};
 let handleViewCaHoi = (sender_psid) => {};
 let handleViewVitQuay = (sender_psid) => {};
-let handleBackMainMenu = (sender_psid) => {};
+let handleBackMainMenu = async (sender_psid) => {
+  await handleSendMainMenu(sender_psid);
+};
 module.exports = {
   handleGetStarted,
   handleSendMainMenu,
