@@ -13,6 +13,7 @@ const IMG_BACK_TO_MAIN_MENU = "https://bit.ly/eric-bot-8";
 const IMG_DETAIL_APPETIZERS_1 = "https://bit.ly/3Xpq6Rv";
 const IMG_DETAIL_APPETIZERS_2 = "https://bit.ly/4c77jPf";
 const IMG_DETAIL_APPETIZERS_3 = "https://bit.ly/eric-bot-11";
+
 const IMG_DETAIL_FISH_1 = "https://bit.ly/eric-bot-12";
 const IMG_DETAIL_FISH_2 = "https://bit.ly/eric-bot-13";
 const IMG_DETAIL_FISH_3 = "https://bit.ly/eric-bot-14";
@@ -141,7 +142,6 @@ let getMainMenuTemplate = () => {
       type: "template",
       payload: {
         template_type: "generic",
-        top_element_style: "large",
         elements: [
           {
             title: "Xin chào bạn đến với nhà hàng của NvC!!!",
