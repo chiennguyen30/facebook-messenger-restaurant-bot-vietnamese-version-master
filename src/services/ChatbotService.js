@@ -25,6 +25,8 @@ const IMG_DETAIL_MEAT_3 = "https://bit.ly/3RwQBAO";
 const IMG_DETAIL_DUCK_1 = "https://bit.ly/4baNDZz";
 const IMG_DETAIL_DUCK_2 = "https://bit.ly/4etnEiP";
 const IMG_DETAIL_DUCK_3 = "https://bit.ly/4c2XBO1";
+
+const IMG_DETAIL_ROOM = "https://bit.ly/eric-bot-18";
 let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
   let request_body = {
@@ -355,43 +357,63 @@ let getDinnerMenuTemplate = () => {
         template_type: "generic",
         elements: [
           {
-            title: "Xin chào bạn đến với nhà hàng của NvC!!!",
-            subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn!!!",
-            image_url: IMG_MAIN_MENU_2,
+            title: "Món tráng miệng",
+            subtitle: "Nhà hàng có nhiều món tráng miệng hấp dẫn",
+            image_url: IMG_LUCNH_MENU_NGOI_SEN,
             buttons: [
               {
                 type: "postback",
-                title: "BỮA TRƯA",
-                payload: "LUNCH_MENU",
-              },
-              {
-                type: "postback",
-                title: "BƯA TỐI",
-                payload: "DINNER_MENU",
+                title: "XEM CHI TIẾT",
+                payload: "VIEW_APPETIZERS",
               },
             ],
           },
           {
-            title: "Giờ mở cửa của nhà hàng của NvC!",
-            subtitle: "T2-T6 10AM-11PM | T7 5PM - 10PM | CN 5PM - 9PM",
-            image_url: IMG_MAIN_MENU_3,
+            title: "Thưởng thức steak",
+            subtitle:
+              "Muốn có thịt bò bít tết thơm ngon cả nhà đều mê, đầu tiên mình phải chọn được loại thịt chất lượng",
+            image_url: IMG_LUCNH_MENU_STEACK,
             buttons: [
               {
                 type: "postback",
-                title: "ĐẶT BÀN",
-                payload: "RESERVE_TABLE",
+                title: "XEM CHI TIẾT",
+                payload: "VIEW_STEAK",
               },
             ],
           },
           {
-            title: "Không gian nhà hàng!",
-            subtitle: "Nhà hàng có sức chưa lên tới 300 khách ngồi và phục vụ các bữa tiệc lớn!",
-            image_url: IMG_MAIN_MENU_4,
+            title: "Cá hồi",
+            subtitle: "Cá hồi áp chảo,Cháo cá hồi,Cá hồi nướng,Ruốc cá hồi...",
+            image_url: IMG_LUCNH_MENU_CA_HOI,
             buttons: [
               {
                 type: "postback",
-                title: "CHI TIẾT PHÒNG",
-                payload: "SHOW_ROOM",
+                title: "XEM CHI TIẾT",
+                payload: "VIEW_CA_HOI",
+              },
+            ],
+          },
+          {
+            title: "Vịt quay",
+            subtitle: "Vịt Bắc Kinh,Vịt Tứ Xuyên,Vịt Quế Hoa Nam Kinh,...",
+            image_url: IMG_LUCNH_MENU_VIT_QUAY,
+            buttons: [
+              {
+                type: "postback",
+                title: "XEM CHI TIẾT",
+                payload: "VIEW_VIT_QUAY",
+              },
+            ],
+          },
+          {
+            title: "Quay trở lại",
+            subtitle: "Quay trở lại menu chính",
+            image_url: IMG_BACK_TO_MAIN_MENU,
+            buttons: [
+              {
+                type: "postback",
+                title: "QUAY TRỞ LẠI",
+                payload: "BACK_TO_MAIN_MENU",
               },
             ],
           },
@@ -610,6 +632,58 @@ let handleViewVitQuay = (sender_psid) => {
 let handleBackMainMenu = async (sender_psid) => {
   await handleSendMainMenu(sender_psid);
 };
+let handleShowDetailRoom = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //send an img
+      let response1 = getImgRoomsTemplates();
+      //send a button templates : text,button
+      let response2 = getButtonRoomstemplates();
+      await callSendAPI(sender_psid, response1);
+      await callSendAPI(sender_psid, response2);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+let getImgRoomsTemplates = () => {
+  let response = {
+    attachment: {
+      type: "image",
+      payload: {
+        url: IMG_DETAIL_ROOM,
+        is_reusable: true,
+      },
+    },
+  };
+  return response;
+};
+
+let getButtonRoomstemplates = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: "Nhà hàng có thể phục tối đa 300 khách hàng",
+        buttons: [
+          {
+            type: "postback",
+            title: "MENU CHÍNH",
+            payload: "MAIN_MENU",
+          },
+          {
+            type: "postback",
+            title: "ĐẶT BÀN",
+            payload: "RESERVE_TABLE",
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
 module.exports = {
   handleGetStarted,
   handleSendMainMenu,
@@ -620,4 +694,5 @@ module.exports = {
   handleViewCaHoi,
   handleViewVitQuay,
   handleBackMainMenu,
+  handleShowDetailRoom,
 };

@@ -157,6 +157,9 @@ async function handlePostback(sender_psid, received_postback) {
     case "BACK_TO_MAIN_MENU":
       await ChatbotService.handleBackMainMenu(sender_psid);
       break;
+    case "SHOW_ROOM":
+      await ChatbotService.handleShowDetailRoom(sender_psid);
+      break;
     default:
       response = { text: "Xin lỗi vì đã gây khó chịu cho bạn!" };
       break;
