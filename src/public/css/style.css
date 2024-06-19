@@ -3,9 +3,7 @@ body{
   flex-direction: column;
   min-height: 90vh;
 }
-._4bmm {
-  padding: 0 !important;
-}
+
 .fix-height{
   flex: 1;
 }
