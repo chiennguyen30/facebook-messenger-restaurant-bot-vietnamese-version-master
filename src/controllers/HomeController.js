@@ -275,10 +275,15 @@ let postSetuppersistentMenu = async (req, res) => {
   res.send("Setup profile success!");
 };
 
+let handleReserveTable = (req, res) => {
+  return res.render("reserve-table.ejs");
+};
+
 module.exports = {
   getHomePage,
   postWebhook,
   getWebhook,
   postSetupProfile,
   postSetuppersistentMenu,
+  handleReserveTable,
 };
