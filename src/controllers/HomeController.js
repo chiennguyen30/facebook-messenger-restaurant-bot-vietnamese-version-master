@@ -130,7 +130,6 @@ async function handlePostback(sender_psid, received_postback) {
       await ChatbotService.handleGetStarted(sender_psid);
       break;
     case "RESTART_BOT":
-      console.log(`Handling GET_STARTED or RESTART_BOT for sender_psid: ${sender_psid}`);
       await ChatbotService.handleGetStarted(sender_psid);
       break;
     case "MAIN_MENU":
