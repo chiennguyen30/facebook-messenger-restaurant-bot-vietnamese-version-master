@@ -706,4 +706,5 @@ module.exports = {
   handleViewVitQuay,
   handleBackMainMenu,
   handleShowDetailRoom,
+  callSendAPI,
 };

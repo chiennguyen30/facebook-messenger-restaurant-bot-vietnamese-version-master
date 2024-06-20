@@ -277,7 +277,32 @@ let postSetuppersistentMenu = async (req, res) => {
 let handleReserveTable = (req, res) => {
   return res.render("reserve-table.ejs");
 };
-
+let handlePostReserveTable = async (req, res) => {
+  try {
+    let customerName = "";
+    if (req.body.customerName === "") {
+      customerName = "Để trống";
+    } else customerName = req.body.customerName;
+    // i demo res with sample text
+    // you can check database for custum order's status
+    let response1 = {
+      text: `---Thông tin khách hàng đặt bàn---
+      \nHọ và tên : ${customerName}
+      \nĐiạ chỉ email : ${req.body.email}
+      \nSố điện thoại : ${req.body.phoneNumber}
+      `,
+    };
+    await ChatbotService.callSendAPI(req.body.psid, response1);
+    return res.status(200).json({
+      message: "ok",
+    });
+  } catch (error) {
+    console.log("error code reserve table", error);
+    return res.status(500).json({
+      message: "Server error",
+    });
+  }
+};
 module.exports = {
   getHomePage,
   postWebhook,
@@ -285,4 +310,5 @@ module.exports = {
   postSetupProfile,
   postSetuppersistentMenu,
   handleReserveTable,
+  handlePostReserveTable,
 };
