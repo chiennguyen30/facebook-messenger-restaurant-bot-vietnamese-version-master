@@ -275,7 +275,10 @@ let postSetuppersistentMenu = async (req, res) => {
 };
 
 let handleReserveTable = (req, res) => {
-  return res.render("reserve-table.ejs");
+  let senderId = req.params.senderId;
+  return res.render("reserve-table.ejs", {
+    senderId: senderId,
+  });
 };
 let handlePostReserveTable = async (req, res) => {
   try {

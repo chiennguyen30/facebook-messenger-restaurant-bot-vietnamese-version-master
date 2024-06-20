@@ -23,6 +23,10 @@ window.extAsyncInit = function () {
     function error(err) {
       // error
       console.log("Lỗi đặt bàn nvc bot", err);
+
+      //run failback,get userId form url
+      $("#psid").val(senderId);
+      handleClickButtonReserveTable();
     }
   );
 };
