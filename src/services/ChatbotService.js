@@ -137,7 +137,7 @@ let handleGetStarted = (sender_psid) => {
       let response1 = {
         text: `Xin chào bạn ${userName} đến với Fullstack bạn cần mình giúp gì không?`,
       };
-      let response2 = getStartedTemplate();
+      let response2 = getStartedTemplate(sender_psid);
       await callSendAPI(sender_psid, response1);
       await callSendAPI(sender_psid, response2);
       resolve("done");
@@ -147,7 +147,7 @@ let handleGetStarted = (sender_psid) => {
   });
 };
 
-let getStartedTemplate = () => {
+let getStartedTemplate = (sender_psid) => {
   let response = {
     attachment: {
       type: "template",
@@ -166,7 +166,7 @@ let getStartedTemplate = () => {
               },
               {
                 type: "web_url",
-                url: `${process.env.URL_WEB_VIEW_ORDER}`,
+                url: `${process.env.URL_WEB_VIEW_ORDER}/${sender_psid}`,
                 title: "ĐẶT BÀN",
                 payload: "RESERVE_TABLE",
                 webview_height_ratio: "tall",
@@ -189,7 +189,7 @@ let getStartedTemplate = () => {
 let handleSendMainMenu = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let response1 = getMainMenuTemplate();
+      let response1 = getMainMenuTemplate(sender_psid);
       await callSendAPI(sender_psid, response1);
       resolve("done");
     } catch (error) {
@@ -198,7 +198,7 @@ let handleSendMainMenu = (sender_psid) => {
   });
 };
 
-let getMainMenuTemplate = () => {
+let getMainMenuTemplate = (sender_psid) => {
   let response = {
     attachment: {
       type: "template",
@@ -229,7 +229,7 @@ let getMainMenuTemplate = () => {
             buttons: [
               {
                 type: "web_url",
-                url: `${process.env.URL_WEB_VIEW_ORDER}`,
+                url: `${process.env.URL_WEB_VIEW_ORDER}/${sender_psid} `,
                 title: "ĐẶT BÀN",
                 payload: "RESERVE_TABLE",
                 webview_height_ratio: "tall",
@@ -267,7 +267,7 @@ let handleSendLunchMenu = (sender_psid) => {
   });
 };
 
-let getLunchMenuTemplate = () => {
+let getLunchMenuTemplate = (sender_psid) => {
   let response = {
     attachment: {
       type: "template",
@@ -642,9 +642,9 @@ let handleShowDetailRoom = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
       //send an img
-      let response1 = getImgRoomsTemplates();
+      let response1 = getImgRoomsTemplates(sender_psid);
       //send a button templates : text,button
-      let response2 = getButtonRoomstemplates();
+      let response2 = getButtonRoomstemplates(sender_psid);
       // Thêm thời gian chờ để đảm bảo thứ tự
       await new Promise((resolve) => setTimeout(resolve, 500));
       await callSendAPI(sender_psid, response1);
@@ -668,7 +668,7 @@ let getImgRoomsTemplates = () => {
   return response;
 };
 
-let getButtonRoomstemplates = () => {
+let getButtonRoomstemplates = (sender_psid) => {
   let response = {
     attachment: {
       type: "template",
@@ -683,7 +683,7 @@ let getButtonRoomstemplates = () => {
           },
           {
             type: "web_url",
-            url: `${process.env.URL_WEB_VIEW_ORDER}`,
+            url: `${process.env.URL_WEB_VIEW_ORDER}/${sender_psid}`,
             title: "ĐẶT BÀN",
             payload: "RESERVE_TABLE",
             webview_height_ratio: "tall",
