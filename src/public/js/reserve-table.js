@@ -57,7 +57,9 @@ function validateInputFields() {
 
 function handleClickButtonReserveTable() {
   $("#btnReserveTable").on("click", function (e) {
-    let check = validateInputFields(); //return true or false
+    e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+    let check = validateInputFields(); // Trả về true hoặc false
 
     let data = {
       psid: $("#psid").val(),
@@ -67,25 +69,27 @@ function handleClickButtonReserveTable() {
     };
 
     if (!check) {
-      //close webview
-      MessengerExtensions.requestCloseBrowser(
-        function success() {
-          // webview closed
-        },
-        function error(err) {
-          // an error occurred
-          console.log(err);
-        }
-      );
-
-      //send data to node.js server
+      // Gửi dữ liệu đến server
       $.ajax({
         url: `${window.location.origin}/reserve-table-ajax`,
         method: "POST",
         data: data,
-        success: function (data) {
-          console.log(data);
-          // console.log(data);
+        success: function (response) {
+          console.log(response);
+
+          // Ẩn form sau khi đặt bàn thành công
+          $(".container").hide(); // Thay .container bằng id hoặc class của phần tử bạn muốn ẩn
+
+          // Đóng webview
+          MessengerExtensions.requestCloseBrowser(
+            function success() {
+              // Đã đóng webview
+            },
+            function error(err) {
+              // Xảy ra lỗi
+              console.log(err);
+            }
+          );
         },
         error: function (error) {
           console.log(error);
