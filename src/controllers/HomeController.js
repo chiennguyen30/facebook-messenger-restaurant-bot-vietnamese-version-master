@@ -1,9 +1,41 @@
 require("dotenv").config();
+import moment from "moment";
 import request from "request";
 import ChatbotService from "../services/ChatbotService";
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
+const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
 //process.env.NAME_VARIABLES
+
+let writeDataToGoogleSheet = async (data) => {
+  let currentDate = new Date();
+
+  const format = "HH:mm DD/MM/YYYY";
+
+  let formatedDate = moment(currentDate).format(format);
+  // Initialize the sheet - doc ID is the long id in the sheets URL
+  const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+
+  // Initialize Auth - see more available options at https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
+  await doc.useServiceAccountAuth({
+    client_email: JSON.parse(`"${GOOGLE_SERVICE_ACCOUNT_EMAIL}"`),
+    private_key: JSON.parse(`"${GOOGLE_PRIVATE_KEY}"`),
+  });
+  await doc.loadInfo(); // loads document properties and worksheets
+  const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+
+  // append rows
+  await sheet.addRow({
+    "Tên Facebook": data.username,
+    "Địa chỉ Email": data.email,
+    "Số điện thoại": data.phoneNumber,
+    "Thời gian": formatedDate,
+    "Tên khách hàng": data.customerName,
+  });
+};
 let getHomePage = (req, res) => {
   return res.render("homepage.ejs");
 };
@@ -282,9 +314,18 @@ let handleReserveTable = (req, res) => {
 };
 let handlePostReserveTable = async (req, res) => {
   try {
+    username = await ChatbotService.getUserName(req.body.psid);
+    //read data to google sheet
+    let data = {
+      username: username,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      customerName: req.body.customerName,
+    };
+    await writeDataToGoogleSheet(data);
     let customerName = "";
     if (req.body.customerName === "") {
-      customerName = await ChatbotService.getUserName(req.body.psid);
+      customerName = username;
     } else customerName = req.body.customerName;
     // i demo res with sample text
     // you can check database for custum order's status
