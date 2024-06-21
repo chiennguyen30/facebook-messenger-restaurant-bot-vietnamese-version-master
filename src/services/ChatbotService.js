@@ -707,4 +707,5 @@ module.exports = {
   handleBackMainMenu,
   handleShowDetailRoom,
   callSendAPI,
+  getUserName,
 };

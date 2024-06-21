@@ -284,7 +284,7 @@ let handlePostReserveTable = async (req, res) => {
   try {
     let customerName = "";
     if (req.body.customerName === "") {
-      customerName = "Để trống";
+      customerName = await ChatbotService.getUserName(req.body.psid);
     } else customerName = req.body.customerName;
     // i demo res with sample text
     // you can check database for custum order's status
