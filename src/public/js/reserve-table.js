@@ -68,16 +68,14 @@ function handleClickButtonReserveTable() {
 
     if (!check) {
       //close webview
-      window.extAsyncInit = function () {
-        MessengerExtensions.requestCloseBrowser(
-          function success() {
-            window.close(); // webview closed
-          },
-          function error(err) {
-            print("an error occured");
-          }
-        );
-      };
+      MessengerExtensions.requestCloseBrowser(
+        function success() {
+          // webview closed
+        },
+        function error(err) {
+          // an error occurred
+        }
+      );
 
       //send data to node.js server
       $.ajax({
