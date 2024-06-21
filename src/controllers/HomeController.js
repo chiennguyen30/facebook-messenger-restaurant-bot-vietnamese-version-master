@@ -27,6 +27,9 @@ let writeDataToGoogleSheet = async (data) => {
   await doc.loadInfo(); // loads document properties and worksheets
   const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
 
+  // Log the data to console
+  console.log("Data being written to Google Sheet:", data);
+
   // append rows
   await sheet.addRow({
     "Tên Facebook": data.userName,
@@ -36,6 +39,7 @@ let writeDataToGoogleSheet = async (data) => {
     "Tên khách hàng": data.customerName,
   });
 };
+
 let getHomePage = (req, res) => {
   return res.render("homepage.ejs");
 };
