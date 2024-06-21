@@ -32,12 +32,14 @@ let writeDataToGoogleSheet = async (data) => {
 
   // append rows
   await sheet.addRow({
-    "Tên Facebook": data.userName,
+    "Tên Facebook": data.username,
     "Địa chỉ Email": data.email,
     "Số điện thoại": `'` + data.phoneNumber,
     "Thời gian": formatedDate,
     "Tên khách hàng": data.customerName,
   });
+  // Log success message
+  console.log("Data successfully written to Google Sheet");
 };
 
 let getHomePage = (req, res) => {
@@ -318,10 +320,10 @@ let handleReserveTable = (req, res) => {
 };
 let handlePostReserveTable = async (req, res) => {
   try {
-    userName = await ChatbotService.getUserName(req.body.psid);
+    username = await ChatbotService.getUserName(req.body.psid);
     //read data to google sheet
     let data = {
-      userName: userName,
+      username: username,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       customerName: req.body.customerName,
@@ -329,7 +331,7 @@ let handlePostReserveTable = async (req, res) => {
     await writeDataToGoogleSheet(data);
     let customerName = "";
     if (req.body.customerName === "") {
-      customerName = userName;
+      customerName = username;
     } else customerName = req.body.customerName;
     // i demo res with sample text
     // you can check database for custum order's status

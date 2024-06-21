@@ -120,8 +120,8 @@ let getUserName = (sender_psid) => {
       (err, res, body) => {
         if (!err) {
           body = JSON.parse(body);
-          let userName = `${body.first_name}  ${body.last_name}`;
-          resolve(userName);
+          let username = `${body.first_name}  ${body.last_name}`;
+          resolve(username);
         } else {
           console.error("Unable to send message:" + err);
           reject(err);
@@ -133,9 +133,9 @@ let getUserName = (sender_psid) => {
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
-      let userName = await getUserName(sender_psid);
+      let username = await getUserName(sender_psid);
       let response1 = {
-        text: `Xin chào bạn ${userName} đến với Fullstack bạn cần mình giúp gì không?`,
+        text: `Xin chào bạn ${username} đến với Fullstack bạn cần mình giúp gì không?`,
       };
       let response2 = getStartedTemplate(sender_psid);
       await callSendAPI(sender_psid, response1);
