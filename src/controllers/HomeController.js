@@ -2,7 +2,7 @@ require("dotenv").config();
 import moment from "moment";
 import request from "request";
 import ChatbotService from "../services/ChatbotService";
-import GoogleSpreadsheet from "google-spreadsheet";
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
@@ -315,10 +315,10 @@ let handleReserveTable = (req, res) => {
 };
 let handlePostReserveTable = async (req, res) => {
   try {
-    let userName = await ChatbotService.getUserName(req.body.psid); // Declare userName before using it
+    let username = await ChatbotService.getUserName(req.body.psid);
     //read data to google sheet
     let data = {
-      userName: userName,
+      username: username,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       customerName: req.body.customerName,
