@@ -2,7 +2,7 @@ require("dotenv").config();
 import moment from "moment";
 import request from "request";
 import ChatbotService from "../services/ChatbotService";
-const { GoogleSpreadsheet } = require("google-spreadsheet");
+import GoogleSpreadsheet from "google-spreadsheet";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
@@ -27,9 +27,6 @@ let writeDataToGoogleSheet = async (data) => {
   await doc.loadInfo(); // loads document properties and worksheets
   const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
 
-  // Log the data to console
-  console.log("Data being written to Google Sheet:", data);
-
   // append rows
   await sheet.addRow({
     "Tên Facebook": data.username,
@@ -38,8 +35,6 @@ let writeDataToGoogleSheet = async (data) => {
     "Thời gian": formatedDate,
     "Tên khách hàng": data.customerName,
   });
-  // Log success message
-  console.log("Data successfully written to Google Sheet");
 };
 
 let getHomePage = (req, res) => {
@@ -320,10 +315,10 @@ let handleReserveTable = (req, res) => {
 };
 let handlePostReserveTable = async (req, res) => {
   try {
-    username = await ChatbotService.getUserName(req.body.psid);
+    let userName = await ChatbotService.getUserName(req.body.psid); // Declare userName before using it
     //read data to google sheet
     let data = {
-      username: username,
+      userName: userName,
       email: req.body.email,
       phoneNumber: req.body.phoneNumber,
       customerName: req.body.customerName,
