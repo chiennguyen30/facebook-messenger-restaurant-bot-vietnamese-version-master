@@ -209,11 +209,6 @@ let getStartedQuickReplyTemplate = (sender_psid) => {
       },
       {
         content_type: "text",
-        title: "ĐẶT BÀN",
-        payload: "RESERVE_TABLE",
-      },
-      {
-        content_type: "text",
         title: "HƯỜNG DẪN SỬ DỤNG BOT",
         payload: "GUIDE_TO_USE",
       },
