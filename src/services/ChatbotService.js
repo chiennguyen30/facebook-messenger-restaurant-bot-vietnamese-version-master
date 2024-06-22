@@ -26,6 +26,8 @@ const IMG_DETAIL_DUCK_1 = "https://bit.ly/4baNDZz";
 const IMG_DETAIL_DUCK_2 = "https://bit.ly/4etnEiP";
 const IMG_DETAIL_DUCK_3 = "https://bit.ly/4c2XBO1";
 
+const IMG_GIF_WELCOME = "https://bit.ly/3XuLsNj";
+
 const IMG_DETAIL_ROOM = "https://bit.ly/eric-bot-18";
 let callSendAPI = async (sender_psid, response) => {
   // Construct the message body
@@ -137,9 +139,13 @@ let handleGetStarted = (sender_psid) => {
       let response1 = {
         text: `Xin chào bạn ${username} đến với Fullstack bạn cần mình giúp gì không?`,
       };
-      let response2 = getStartedTemplate(sender_psid);
+      // send an img
+      let response2 = getImgStartedTemplate();
+      // let response2 = getStartedTemplate(sender_psid);
+      let response3 = getStartedQuickReplyTemplate(sender_psid);
       await callSendAPI(sender_psid, response1);
       await callSendAPI(sender_psid, response2);
+      await callSendAPI(sender_psid, response3);
       resolve("done");
     } catch (error) {
       reject(error);
@@ -180,6 +186,46 @@ let getStartedTemplate = (sender_psid) => {
             ],
           },
         ],
+      },
+    },
+  };
+  return response;
+};
+
+let getStartedQuickReplyTemplate = (sender_psid) => {
+  let response = {
+    text: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn:",
+    quick_replies: [
+      {
+        content_type: "text",
+        title: "MENU CHÍNH",
+        payload: "MAIN_MENU",
+        image_url: "http://example.com/img/red.png",
+      },
+      {
+        content_type: "text",
+        title: "ĐẶT BÀN",
+        payload: "RESERVE_TABLE",
+        image_url: "http://example.com/img/green.png",
+      },
+      {
+        content_type: "text",
+        title: "HƯỜNG DẪN SỬ DỤNG BOT",
+        payload: "GUIDE_TO_USE",
+        image_url: "http://example.com/img/green.png",
+      },
+    ],
+  };
+  return response;
+};
+
+let getImgStartedTemplate = () => {
+  let response = {
+    attachment: {
+      type: "image",
+      payload: {
+        url: IMG_GIF_WELCOME,
+        is_reusable: true,
       },
     },
   };
