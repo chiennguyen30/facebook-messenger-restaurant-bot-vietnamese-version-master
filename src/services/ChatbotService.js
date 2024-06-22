@@ -206,19 +206,16 @@ let getStartedQuickReplyTemplate = (sender_psid) => {
         content_type: "text",
         title: "MENU CHÍNH",
         payload: "MAIN_MENU",
-        image_url: "http://example.com/img/red.png",
       },
       {
         content_type: "text",
         title: "ĐẶT BÀN",
         payload: "RESERVE_TABLE",
-        image_url: "http://example.com/img/green.png",
       },
       {
         content_type: "text",
         title: "HƯỜNG DẪN SỬ DỤNG BOT",
         payload: "GUIDE_TO_USE",
-        image_url: "http://example.com/img/green.png",
       },
     ],
   };
