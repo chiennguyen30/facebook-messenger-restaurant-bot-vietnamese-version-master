@@ -137,7 +137,7 @@ let handleGetStarted = (sender_psid) => {
     try {
       let username = await getUserName(sender_psid);
       let response1 = {
-        text: `Xin chào bạn ${username} đến với Fullstack bạn cần mình giúp gì không?`,
+        text: `Xin chào bạn ${username} đến với nhà hàng NvC bạn cần mình giúp gì không?`,
       };
       // send an img
       let response2 = getImgStartedTemplate();
@@ -153,44 +153,44 @@ let handleGetStarted = (sender_psid) => {
   });
 };
 
-let getStartedTemplate = (sender_psid) => {
-  let response = {
-    attachment: {
-      type: "template",
-      payload: {
-        template_type: "generic",
-        elements: [
-          {
-            title: "Nhà hàng NvC kính chào quý khách !!!",
-            subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn",
-            image_url: IMG_GET_STARTED,
-            buttons: [
-              {
-                type: "postback",
-                title: "MENU CHÍNH",
-                payload: "MAIN_MENU",
-              },
-              {
-                type: "web_url",
-                url: `${process.env.URL_WEB_VIEW_ORDER}/${sender_psid}`,
-                title: "ĐẶT BÀN",
-                payload: "RESERVE_TABLE",
-                webview_height_ratio: "tall",
-                messenger_extensions: true,
-              },
-              {
-                type: "postback",
-                title: "HƯỚNG DẪN SỬ DỤNG BOT!",
-                payload: "GUIDE_TO_USE",
-              },
-            ],
-          },
-        ],
-      },
-    },
-  };
-  return response;
-};
+// let getStartedTemplate = (sender_psid) => {
+//   let response = {
+//     attachment: {
+//       type: "template",
+//       payload: {
+//         template_type: "generic",
+//         elements: [
+//           {
+//             title: "Nhà hàng NvC kính chào quý khách !!!",
+//             subtitle: "Dưới đây là những lựa chọn của nhà hàng dành cho bạn",
+//             image_url: IMG_GET_STARTED,
+//             buttons: [
+//               {
+//                 type: "postback",
+//                 title: "MENU CHÍNH",
+//                 payload: "MAIN_MENU",
+//               },
+//               {
+//                 type: "web_url",
+//                 url: `${process.env.URL_WEB_VIEW_ORDER}/${sender_psid}`,
+//                 title: "ĐẶT BÀN",
+//                 payload: "RESERVE_TABLE",
+//                 webview_height_ratio: "tall",
+//                 messenger_extensions: true,
+//               },
+//               {
+//                 type: "postback",
+//                 title: "HƯỚNG DẪN SỬ DỤNG BOT!",
+//                 payload: "GUIDE_TO_USE",
+//               },
+//             ],
+//           },
+//         ],
+//       },
+//     },
+//   };
+//   return response;
+// };
 
 let getStartedQuickReplyTemplate = (sender_psid) => {
   let response = {
