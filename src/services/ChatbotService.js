@@ -26,7 +26,7 @@ const IMG_DETAIL_DUCK_1 = "https://bit.ly/4baNDZz";
 const IMG_DETAIL_DUCK_2 = "https://bit.ly/4etnEiP";
 const IMG_DETAIL_DUCK_3 = "https://bit.ly/4c2XBO1";
 
-const IMG_GIF_WELCOME = "https://bit.ly/3XuLsNj";
+const IMG_GIF_WELCOME = "https://bit.ly/3KRsau5";
 
 const IMG_DETAIL_ROOM = "https://bit.ly/eric-bot-18";
 let callSendAPI = async (sender_psid, response) => {
