@@ -739,6 +739,56 @@ let getButtonRoomstemplates = (sender_psid) => {
   };
   return response;
 };
+
+let handleGuideToUse = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      //send text message
+      let username = await getUserName(sender_psid);
+      let response1 = {
+        text: `Xin chào bạn ${username}, mình là chatbot nhà hàng NvC.\n Để biết thêm tin bạn vui lòng xem video bên dưới😊😊!`,
+      };
+      let response2 = getBotMediaTemplates(sender_psid);
+      await callSendAPI(sender_psid, response1);
+      await callSendAPI(sender_psid, response2);
+      resolve("done");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+let getBotMediaTemplates = () => {
+  let response = {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "media",
+        elements: [
+          {
+            media_type: "video",
+            attachment_id: "1612083259646978",
+            buttons: [
+              {
+                type: "postback",
+                title: "MENU CHÍNH",
+                payload: "MAIN_MENU",
+              },
+              {
+                type: "web_url",
+                title: "Youtube channel NvC IT",
+                url: "https://www.youtube.com/channel/UCDYhLHj32re_gsy_QhWVhog",
+                webview_height_ratio: "full",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  };
+  return response;
+};
+
 module.exports = {
   handleGetStarted,
   handleSendMainMenu,
@@ -752,4 +802,5 @@ module.exports = {
   handleShowDetailRoom,
   callSendAPI,
   getUserName,
+  handleGuideToUse,
 };

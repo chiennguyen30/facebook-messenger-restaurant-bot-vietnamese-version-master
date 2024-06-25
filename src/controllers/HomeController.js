@@ -106,6 +106,7 @@ async function handleMessage(sender_psid, received_message) {
       await ChatbotService.handleSendMainMenu(sender_psid);
     }
     if (received_message.quick_reply.payload === "GUIDE_TO_USE") {
+      await ChatbotService.handleGuideToUse(sender_psid);
     }
     return;
   }
