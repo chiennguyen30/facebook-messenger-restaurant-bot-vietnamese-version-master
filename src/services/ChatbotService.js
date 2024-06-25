@@ -770,7 +770,8 @@ let getBotMediaTemplates = () => {
         elements: [
           {
             media_type: "video",
-            attachment_id: "1612083259646978",
+            // attachment_id: "1612083259646978",
+            url: "https://www.facebook.com/NvcIT/videos/1649410269228442",
             buttons: [
               {
                 type: "postback",
