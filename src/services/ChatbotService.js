@@ -52,6 +52,9 @@ let callSendAPI = async (sender_psid, response) => {
           json: request_body,
         },
         (err, res, body) => {
+          console.log("----------------");
+          console.log(body);
+          console.log("----------------");
           if (!err) {
             resolve("message sent!");
           } else {
